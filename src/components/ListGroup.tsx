@@ -1,17 +1,40 @@
-import { Fragment } from "react";
+import { useState } from "react";
+import { MouseEvent } from "react";
+// { items: [], heading: string } //we should create an interface
 
-function ListGroup() {
-  let cities = ["New York", "San Francisco", "Tokyo", "Kyiv"];
-  cities = [];
+interface ListGroupProps {
+  items: string[];
+  heading: string;
+}
+
+function ListGroup({ items, heading }: ListGroupProps) {
+  //event handler
+  const handleClick = (event: MouseEvent) => {
+    console.log(event);
+  };
+
+  //hook
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  // const [name, setName] = useState(""); // for string
 
   return (
     <>
-      <h1>List</h1>
-      {cities.length === 0 && <p>No cities</p>}
+      <h1>{heading}</h1>
+      {items.length === 0 && <p>No items</p>}
       <ul className="list-group">
-        {cities.map((city) => (
-          <li className="list-group-item" key={city}>
-            {city}
+        {items.map((item, index) => (
+          <li
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            key={item}
+            onClick={() => {
+              setSelectedIndex(index);
+            }}
+          >
+            {item}
           </li>
         ))}
       </ul>
