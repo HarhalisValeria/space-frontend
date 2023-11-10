@@ -1,2 +1,2 @@
 # space-website
-Creating my first website with react. 
+Creating my first website with React and TypeScript. 
